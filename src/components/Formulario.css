@@ -11,7 +11,7 @@ body{
 }
 .formulario{
     background:linear-gradient(50deg,#4a7ff7,#f52fcf);
-    margin-top: 150px;
+    margin-top: 20px;
     padding:  25px;
 }
 h1{
@@ -62,7 +62,7 @@ input[type="password"]{
     background-color: rgb(89, 24, 192);
     align-content: center;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 40px;
     margin-top: 10px;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -82,10 +82,31 @@ p{
     .formulario{
         margin:auto;
         width: 500px;
-        margin-top: 150px;
+        margin-top: 20px;
         border-radius: 10px
     }
 }
 .navbar-title{
     color: rgb(232, 238, 240);
+}
+
+.card-task{
+    color: white;
+    background-color: rgb(89, 24, 192);
+}
+.container-card{
+    padding-top: 30px;
+    display: grid;
+    grid-template-columns: 3fr 3fr 3fr 3fr;
+    grid-row: 10px;
+    grid-gap: 10px;
+}
+.button-task{
+    width: auto;
+    padding: 10px 10px;
+    margin: 10px 10px;
+    border-radius: 20px;
+    border: none;
+    background-color: rgb(108, 149, 196);
+    color: white;
 }

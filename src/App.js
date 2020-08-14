@@ -8,7 +8,6 @@ import PanelTareas from './components/panelTareas'
 
   /* router */
 import {
-  BrowserRouter as Router,
   Switch,
   Route,
   Link
@@ -22,14 +21,14 @@ function App() {
     console.log('useEffect')
     setTimeout(()=>{
       setLoading(false)
-    },5000)
+    },2000)
   })
 
   return (
     
       loading 
         ?<Loading/> 
-        : <Router>
+        : 
             <div className="container mt-5">
               <h2 className="navbar-title">Bienvenido</h2>
               <div className="btn btn-group">
@@ -66,7 +65,6 @@ function App() {
                     </Route>
                 </Switch>
            </div>
-        </Router> 
       ) 
 }
 

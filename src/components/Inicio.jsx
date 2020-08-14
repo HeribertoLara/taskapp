@@ -5,7 +5,9 @@ const Home = () =>{
 
     return(
         <Fragment>
-            <h2>PAGINA DE INICIO</h2>
+            <div className= "container">
+                <h2>PAGINA DE INICIO</h2>
+            </div>
         </Fragment>
     )
 }

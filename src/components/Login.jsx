@@ -1,18 +1,19 @@
-import React, {Fragment, useState,useEffect} from "react";
-
+import React, {Fragment, useState} from "react";
 import "./Formulario.css"
 /* components extern  */
 import axios from 'axios';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faEnvelope, faKey} from '@fortawesome/free-solid-svg-icons'
 /* Tostify */
-/* import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
- */
-/* import { Redirect } from "react-router-dom"; */
+import{ toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+// router
+  /* router */
+  import {useHistory} from "react-router-dom";
+
+toast.configure()
 const Login = () => {
-    
-  /*   const notify= () => toast('Prueba Tostify') */
 
     const [datos, setDatos]= useState({
         email:'',
@@ -20,28 +21,40 @@ const Login = () => {
     })
     const [message, setMessage]= useState('')
 
+    const history= useHistory();
+
     const handleInputChange = (event)=>{
-       /*  console.log(event.target.value) */
         setDatos({
           ...datos,
           [event.target.name] : event.target.value
         })
     }
     const enviarDatos= async (event)=>{
+       try{
         event.preventDefault();
         console.log(datos.email+ ' ' + datos.password)
         let url= "https://academlo-todolist.herokuapp.com/login"
         let respuesta = await axios.post(url, datos)
-        console.log(respuesta)
+        console.log(respuesta.status)
         setMessage(respuesta.data.results)
         console.log(message)
+// si  el respuesta.status es =200 entonces  aparecera una notificacion y redireccionara a otra pagina
+        if (respuesta.status===200){
+            notifyLogin()
+            history.push('/panelTareas')
+        } 
+        }  
+        catch{
+            notifyError()
+        }    
     }
-        /* if (Login===true){
-            console.log(setLogin)
-            return(
-            <Redirect to="./panelTareas"/>
-           )          
-        } */
+    const notifyLogin= ()=>{
+        toast.info('Credenciles correctas bienvenido')
+    }
+    const notifyError= ()=>{
+        toast.error('e-mail o contraseña incorrectos')
+    }
+   
     
     return (
         <Fragment>
@@ -67,7 +80,7 @@ const Login = () => {
                             onChange={handleInputChange}/>
                 </div>
                 <div className= "form-group">
-                    <button className="button" type="submit" /* onClick={verification} */>Programar Tarea</button>
+                    <button className="button" type="submit" >INICIO DE SESION</button>
                 </div> 
             </form>
             </div>
