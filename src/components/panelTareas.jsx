@@ -1,18 +1,36 @@
-import React,{Fragment} from 'react';
+import React,{Fragment, useState} from 'react';
 import "./Formulario.css"
 import Task from "./Tasks"
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTasks} from '@fortawesome/free-solid-svg-icons';
+import Axios from 'axios';
 
 const PanelTareas= ()=>{
-
-
+    const [data, setData] = useState(
+    {
+        content: "",
+        date: "",
+    }
+    )
+    const handleInputChange = (event)=>{
+        setData({
+            ...data,
+            [event.target.name] : event.target.value
+        })
+    }
+    const enviarData = async (event)=>{
+        event.preventDefault()
+        console.log(data.content + ' '+ data.date)
+        let url="https://academlotodolist.herokuapp.com/tasks"
+        let res= await Axios.post(url,data)
+        console.log(res)
+    }
     return( 
         <Fragment>
             <div className="container">
            {/*  <ToastContainer  /> */}
-            <form  className="formulario" >
+            <form onSubmit={enviarData} className="formulario" >
             <h1> Panel de Tareas </h1>
                     <div>
                     <FontAwesomeIcon icon={faTasks} className="icon"  />
@@ -20,14 +38,16 @@ const PanelTareas= ()=>{
                             className="form-control" 
                             placeholder="Tarea" 
                             type="text"
-                            name="task"/>
+                            name="content"
+                            onChange={handleInputChange}/>
                     </div>
                     <div>
                     <input  
                             className="form-control"
                             placeholder="Fecha" 
                             type="date"
-                            name="date"/>
+                            name="date"
+                            onChange={handleInputChange}/>
                 </div>
         
                 <div className= "form-group">
