@@ -1,4 +1,4 @@
-import React,{Fragment, useState} from 'react';
+import React,{Fragment, useState, useEffect} from 'react';
 import "./Formulario.css"
 import Task from "./Tasks"
 
@@ -7,25 +7,31 @@ import {faTasks} from '@fortawesome/free-solid-svg-icons';
 import Axios from 'axios';
 
 const PanelTareas= ()=>{
-    const [data, setData] = useState(
-    {
+    const [data, setData] = useState({
         content: "",
         date: "",
-    }
-    )
+    })
+
     const handleInputChange = (event)=>{
         setData({
             ...data,
             [event.target.name] : event.target.value
         })
     }
+    
+    // useEffect(()=>{
+    //     console.log('useEffectPanelTareas')
+    //     enviarData()
+    // }, [])
+
     const enviarData = async (event)=>{
         event.preventDefault()
         console.log(data.content + ' '+ data.date)
-        let url="https://academlotodolist.herokuapp.com/tasks"
+        let url="https://academlo-todolist.herokuapp.com/tasks"
         let res= await Axios.post(url,data)
         console.log(res)
     }
+
     return( 
         <Fragment>
             <div className="container">

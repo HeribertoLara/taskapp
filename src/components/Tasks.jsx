@@ -3,7 +3,10 @@ import axios from 'axios';
 
 
 const Tasks = ()=>{
+    
     const [tasks, setTasks] = useState([])
+    /* estado para borrar trea */
+    const [del, setDel] = useState('')
 
     useEffect(() => {
         tareas()
@@ -19,8 +22,17 @@ const Tasks = ()=>{
             console.log(error)
         }
     }
-    
-   
+
+    const deleteTask= async(del)=>{
+            try{
+                const resDel= await axios.delete('https://academlo-todolist.herokuapp.com/tasks/${_id}')
+                console.log(resDel)
+                setDel(resDel)
+                    
+            }catch (error){
+                console.log(error)
+            }
+        } 
 
     return(
         <Fragment>
@@ -32,6 +44,7 @@ const Tasks = ()=>{
                     <div>{task.date} </div>
                     <div>
                         <button className="button-task">Modificar</button> 
+                        <button className="button-task" onClick={deleteTask}>Modificar</button> 
                     </div>
                 </div>        
             )}
